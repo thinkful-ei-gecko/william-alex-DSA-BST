@@ -9,10 +9,10 @@
 class BinarySearchTree {
   constructor(key = null, value = null, parent = null) {
     this.value = value,
-      this.key = key,
-      this.parent = parent,
-      this.left = null,
-      this.right = null
+    this.key = key,
+    this.parent = parent,
+    this.left = null,
+    this.right = null;
   }
 
   insert(key, value) {
@@ -24,14 +24,14 @@ class BinarySearchTree {
       if (this.left == null) {
         this.left = new BinarySearchTree(key, value, this);
       } else {
-        this.left.insert(key, value)
+        this.left.insert(key, value);
       }
     }
     else {
       if (this.right == null) {
-        this.right = new BinarySearchTree(key, value, this)
+        this.right = new BinarySearchTree(key, value, this);
       } else {
-        this.right.insert(key, value)
+        this.right.insert(key, value);
       }
     }
   }
@@ -60,17 +60,17 @@ class BinarySearchTree {
       this.left.remove(key);
     }
     else if (this.key > this.key && this.right) {
-      this.right.remove(key)
+      this.right.remove(key);
     }
     else {
-      throw new Error(`Item not found`);
+      throw new Error('Item not found');
     }
 
   }
 
   _findMin() {
     if (this.left) {
-      this.left._findMin()
+      this.left._findMin();
     }
     else {
       return this;
@@ -111,12 +111,12 @@ class BinarySearchTree {
       return this.value;
     }
     else if (this.key >= key && this.left) {
-      return this.left.find(item)
+      return this.left.find(key);
     } else if (this.key < key && this.right) {
-      return this.right.find(item)
+      return this.right.find(key);
     }
     else {
-      throw new Error(`Item doesn't exist`);
+      throw new Error('Item doesn\'t exist');
     }
   }
 

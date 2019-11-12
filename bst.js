@@ -1,17 +1,16 @@
 const BinarySearchTree = require('./BinarySearchTree');
 
 function main() {
-
   const BST = new BinarySearchTree();
 
-  // BST.insert(3, '3');
-  // BST.insert(1, '1');
-  // BST.insert(4, '4');
-  // BST.insert(6, '6');
-  // BST.insert(9, '9');
-  // BST.insert(2, '2');
-  // BST.insert(5, '5');
-  // BST.insert(7, '7');
+  BST.insert(3, 3);
+  BST.insert(1, 1);
+  BST.insert(4, 4);
+  BST.insert(6, 6);
+  BST.insert(9, 9);
+  BST.insert(2, 2);
+  BST.insert(5, 5);
+  BST.insert(7, 7);
 
   // BST.insert('E', 'E');
   // BST.insert('A', 'A');
@@ -40,24 +39,32 @@ function printPretty(BST) {
     };
   }
 }
+// console.log(JSON.stringify(printPretty(main())));
 
-console.log(JSON.stringify(printPretty(main())));
+// 5. Height
+function bstHeight(tree) {
+  let leftCounter = 0;
+  let rightCounter = 0;
 
-
-function BstHeight(tree) {
-  //left counter, increment by one for every item in the left of the subtree, so long as there are items.
-  //right counter, increment by one for every item in the right of the subtree, so long as there are items.
-  //compare left and right counters, whichever is higher wins.
-
-
-  // left right counter initiated at root;
-  // if left, go down left path, increment left counter;
-  // if right, go down right path, increment right counter;
-  // if left and right, don't increment counter;
-  // Should return when it hits a leaf (no left or right), return number for comparison;
-
+  //Base case:
+  if(!tree.left && !tree.right) {
+    leftCounter += 1;
+    rightCounter += 1;
+  }
   
+  //Recursive case:
+  if(tree.left) {
+    leftCounter = 1 + bstHeight(tree.left);
+  }
+  if(tree.right) {
+    rightCounter = 1 + bstHeight(tree.right);
+  }
 
-
+  if(leftCounter >= rightCounter) {
+    return leftCounter;
+  } else {
+    return rightCounter;
+  }
   
 }
+console.log(bstHeight(main()));
