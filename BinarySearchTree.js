@@ -36,8 +36,74 @@ class BinarySearchTree {
     }
   }
 
-  remove() {
+  remove(key) {
+    //If node has no children
+    //If node has 1 child, set that child to key
+    //If node has 2 children, set right child to key, associate left child to that key, remove old right child because redundant.
 
+    if (this.key === key) {
+      if (this.right && this.left) {
+        const successor = this.right._findMin();
+        this.key = successor.key;
+        this.value = successor.value;
+        successor.remove(successor.key);
+      }
+      if (this.right) {
+        this._replaceWith(this.right);
+      }
+      if (this.left) {
+        this._replaceWith(this.left);
+      }
+      this.key === null;
+    }
+    else if (key < this.key && this.left) {
+      this.left.remove(key);
+    }
+    else if (this.key > this.key && this.right) {
+      this.right.remove(key)
+    }
+    else {
+      throw new Error(`Item not found`);
+    }
+
+  }
+
+  _findMin() {
+    if (this.left) {
+      this.left._findMin()
+    }
+    else {
+      return this;
+    }
+  }
+
+  _replaceWith(node) {
+    if (this.parent) {
+      if (this == this.parent.left) {
+        this.parent.left = node;
+      }
+      else if (this == this.parent.right) {
+        this.parent.right = node;
+      }
+
+      if (node) {
+        node.parent = this.parent;
+      }
+    }
+    else {
+      if (node) {
+        this.key = node.key;
+        this.value = node.value;
+        this.left = node.left;
+        this.right = node.right;
+      }
+      else {
+        this.key = null;
+        this.value = null;
+        this.left = null;
+        this.right = null;
+      }
+    }
   }
 
   find(key) {
@@ -55,3 +121,5 @@ class BinarySearchTree {
   }
 
 }
+
+module.exports = BinarySearchTree;
