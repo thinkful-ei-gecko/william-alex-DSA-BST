@@ -41,6 +41,7 @@ function printPretty(BST) {
 }
 // console.log(JSON.stringify(printPretty(main())));
 
+
 // 5. Height
 function bstHeight(tree) {
   let leftCounter = 0;
@@ -65,6 +66,42 @@ function bstHeight(tree) {
   } else {
     return rightCounter;
   }
-  
 }
-console.log(bstHeight(main()));
+// console.log(bstHeight(main()));
+
+
+//6. Is it a BST?
+function isBST(tree) {
+  //Base cases:
+  if(tree === null) {
+    return true;
+  }
+
+  //Recursive case:
+  if(tree.left && tree.left.value > tree.value) {
+    return false;
+  }
+  if(tree.right && tree.right.value < tree.value) {
+    return false;
+  }
+  
+  if(!isBST(tree.left) || !isBST(tree.right)) {
+    return false;
+  }
+  return true;
+}
+console.log(isBST({"value":9999999,"left":{"value":1,"left":null,"right":{"value":9,"left":null,"right":null}},"right":{"value":4,"left":null,"right":{"value":6,"left":{"value":5,"left":null,"right":null},"right":{"value":9,"left":{"value":7,"left":null,"right":null},"right":null}}}}));
+console.log(isBST(main()));
+
+
+//7. 3rd largest node
+function thirdLargestNode(tree) {
+  if(!tree.right) {
+    return tree.parent.parent.value;
+  }
+
+  if(tree.right) {
+    return thirdLargestNode(tree.right);
+  }
+}
+// console.log(thirdLargestNode(main()));
