@@ -40,7 +40,18 @@ class BinarySearchTree {
 
   }
 
-  find() {
-
+  find(key) {
+    if (this.key == key) {
+      return this.value;
+    }
+    else if (this.key >= key && this.left) {
+      return this.left.find(item)
+    } else if (this.key < key && this.right) {
+      return this.right.find(item)
+    }
+    else {
+      throw new Error(`Item doesn't exist`);
+    }
   }
+
 }
